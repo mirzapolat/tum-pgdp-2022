@@ -1,0 +1,69 @@
+
+// TODO: Übersetzte hier das Programm aus der Aufgabenstellung nach den Regeln aus der Vorlesung.
+// a = 0
+// b = 1
+// r = 2
+
+
+ALLOC 3
+READ
+STORE 0
+READ
+STORE 1
+
+LOAD 0  // Erstes IF
+CONST 0
+LEQ
+FJUMP ifOne
+    LOAD 0
+    NEG
+    STORE 0
+ifOne:
+
+LOAD 1  // Zweites IF
+CONST 0
+LEQ
+FJUMP ifTwo
+    LOAD 1
+    NEG
+    STORE 1
+ifTwo:
+
+LOAD 0  // r = a * b
+LOAD 1
+MUL
+STORE 2
+
+while: LOAD 0   // While Schleife Anfang
+LOAD 1
+NEQ
+FJUMP whileEnd
+
+    LOAD 1
+    LOAD 0
+    LESS
+    FJUMP ifThree   // Drittes If
+        LOAD 0
+        LOAD 1
+        SUB
+        STORE 0
+    JUMP elseEnd
+    ifThree:        // Else
+        LOAD 1
+        LOAD 0
+        SUB
+        STORE 1
+    elseEnd:
+
+JUMP while
+whileEnd:
+
+LOAD 2  // r = r / a
+LOAD 0
+DIV
+STORE 2
+
+LOAD 2  // Write
+WRITE
+
+HALT    // Ende
